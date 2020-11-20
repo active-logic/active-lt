@@ -1,4 +1,4 @@
-# Active-LT - Stateless Behavior Trees for Unity [beta]
+# Active-LT: Stateless Behavior Trees for Unity [beta]
 
 This package offers stateless behavior trees for Unity, and is a light version 
 of the [Active Logic](https://assetstore.unity.com/packages/tools/ai/active-logic-151850) 
