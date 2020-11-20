@@ -6,8 +6,8 @@ asset available from the Unity Asset Store.
 
 ## Who should use this?
 
-This package is recommended for all prospective Active Logic users. As a strong proponent of
-stateless control, I encourage users to get familiar with the stateless model before getting
+This package is recommended for all prospective Active Logic users. As a [strong proponent of
+stateless control](https://www.gamasutra.com/blogs/ThibaudDeSouza/20201012/371528/Behavior_trees_and_the_future_of_intelligent_control.php), I encourage users to get familiar with the stateless model before getting
 started with ordered composites and decorators.
 
 Stateful control offers added convenience, also helping with problems that stateless control
