@@ -16,6 +16,10 @@ handles less gracefully (such as related to narrative vs logical behavior).
 Although strictly a subset of AL, this package is currently under review, and should be 
 considered a beta version.
 
+## How is this package different from 'active-logic-cs' on Github?
+
+The [active-logic-cs](https://github.com/active-logic/activelogic-cs) package is engine agnostic, and does not feature the Unity integration. If you are not using Unity, you do not need this package.
+
 ## What's in the box?
 
 Everything you find in Active-Logic, minus:
