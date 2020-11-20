@@ -26,7 +26,15 @@ Everything you find in Active-Logic, minus:
 ## Where are the docs?
 
 Please read the documentation on the [main active logic repo](https://github.com/active-logic/activelogic-cs).
+In the near future, a separate tutorial and demo will be provided, so you can (more) easily get started with Active-LT.
 
-Happy coding!
+## Can I release a game made using Active-LT?
+
+- Under AGPL (via Github) you can, provided you share the source (please read the license).
+- Under the Unity Asset Store EULA, you will be able to release games made using the 'LT' library without publishing
+game source; please take patience as requirements for Unity Asset Store releases are more stringent than releasing on Github,
+so I need a few days to clear everything.
+
+*Happy coding!*
 
 ~Tea
