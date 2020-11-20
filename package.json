@@ -1,0 +1,10 @@
+{
+  "name"        : "com.activ.stateless",
+  "version"     : "0.0.0",
+  "displayName" : "Active LT",
+  "description" : "Stateless Behavior Trees",
+  "unity"       : "2018.4",
+  "keywords"    : [ "behavior", "behaviour", "tree", "trees" ],
+  "author"      : { "name": "T.E.A de Souza",
+                    "email": "active.behaviours@gmail.com" }
+}

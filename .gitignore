@@ -1,0 +1,13 @@
+Library
+Temp
+obj
+*.blend1
+*.csproj
+*.icloud
+*.sln
+*.sln.DotSettings.user
+*.userprefs
+Tests-*.xml
+log.txt
+log.txt.meta
+csc.rsp.meta
