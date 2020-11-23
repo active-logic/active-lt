@@ -30,7 +30,7 @@ Everything you find in Active-Logic, minus:
 
 ## Resources
 
-The [frogger tutorial](https://github.com/active-logic/active-lt-demos) teaches you how to use Active-LT step by step (in progress)
+The [frogger tutorial](https://github.com/active-logic/active-lt-demos/Frogger) teaches you how to use Active-LT step by step (in progress)
 
 ## FAQ
 
