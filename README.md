@@ -36,19 +36,23 @@ The [frogger tutorial](https://github.com/active-logic/active-lt-demos/Frogger) 
 
 ### Where are the docs?
 
-Please read the documentation on the [main active logic repo](https://github.com/active-logic/activelogic-cs).
-In the near future, a separate tutorial and demo will be provided, so you can (more) easily get started with Active-LT.
+Read the documentation on the [main active logic repository](https://github.com/active-logic/activelogic-cs).
 
 ### Can I release a game made using Active-LT?
 
-- Under AGPL (via Github) you can, provided you share the source (please read the license).
-- Under the Unity Asset Store EULA, you will be able to release games made using the 'LT' library without publishing
-game source; please take patience as requirements for Unity Asset Store releases are more stringent than releasing on Github,
-so I need a few days to clear everything.
+Under AGPL (via Github), provided you share the source (please read the [license](LICENSE)).
+
+Under the Unity Asset Store EULA, you may release games made using this library without publishing
+game source; as requirements for Unity Asset Store releases are more stringent than releasing on Github,
+I need a few days to clear everything.
 
 ### How is this different from 'active-logic-cs' on Github?
 
-The [active-logic-cs](https://github.com/active-logic/activelogic-cs) package is engine agnostic, and does not feature the Unity integration. If you are not using Unity, you do not need this package.
+The [active-logic-cs](https://github.com/active-logic/activelogic-cs) package does not feature the Unity integration; if you are using Unity, prefer the LT package (here) or the [full-featured Unity Asset](https://assetstore.unity.com/packages/tools/ai/active-logic-151850).
+
+### How do I upgrade to the full version?
+
+Upgrading is easy. Verified steps are described [here](https://github.com/active-logic/activelogic-cs/blob/master/Doc/Upgrading.md#1-remove-active-lt).
 
 *Happy coding!*
 
