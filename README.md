@@ -43,8 +43,7 @@ Read the documentation on the [main active logic repository](https://github.com/
 Under AGPL (via Github), provided you share the source (please read the [license](LICENSE)).
 
 Under the Unity Asset Store EULA, you may release games made using this library without publishing
-game source; as requirements for Unity Asset Store releases are more stringent than releasing on Github,
-I need a few days to clear everything.
+game source (the store package will be available soon).
 
 ### How is this different from 'active-logic-cs' on Github?
 
