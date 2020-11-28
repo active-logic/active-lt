@@ -47,7 +47,10 @@ game source (the store package will be available soon).
 
 ### How is this different from 'active-logic-cs' on Github?
 
-The [active-logic-cs](https://github.com/active-logic/activelogic-cs) package does not feature the Unity integration; if you are using Unity, prefer the LT package (here) or the [full-featured Unity Asset](https://assetstore.unity.com/packages/tools/ai/active-logic-151850).
+The [active-logic-cs](https://github.com/active-logic/activelogic-cs) package does not feature the Unity integration.
+
+- If you are using Unity, prefer the LT package (here) or the [full-featured Unity Asset](https://assetstore.unity.com/packages/tools/ai/active-logic-151850).
+- Otherwise, use *active-logic-cs*.
 
 ### How do I upgrade to the full version?
 
