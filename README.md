@@ -1,3 +1,7 @@
+Git URL: 
+```
+https://github.com/active-logic/active-lt.git
+```
 # Active-LT: Stateless Behavior Trees for Unity
 
 This package offers stateless behavior trees for Unity, and is a light version
