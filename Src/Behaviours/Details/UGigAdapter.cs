@@ -11,6 +11,9 @@ public class UGigAdapter : UGig{
         if(next != null && s.complete){
             GetComponent<Stepper>().root = next;
             Destroy(this);
+            // Necessary, otherwise with a non-looping stepper
+            // execution would stop
+            return status.cont(log && "Pop");
         }
         return s;
     }

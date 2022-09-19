@@ -14,7 +14,7 @@ namespace Active.Editors{
 public class LogTreeWindow : EditorWindow{
 
     public static LogTreeWindow instance;
-    const int FontSize = 11;
+    const int FontSize = 13;
 
     #if !AL_OPTIMIZE
     static Font     _font;
@@ -29,12 +29,12 @@ public class LogTreeWindow : EditorWindow{
     string frameNo => model.frame.HasValue ? $"#{model.frame}" : "...";
 
     void OnFocus(){
-        #if UNITY_2019
-        SceneView.duringSceneGui -= OnSceneGUI;
-        SceneView.duringSceneGui += OnSceneGUI;
-        #else
+        #if UNITY_2017 || UNITY_2018
         SceneView.onSceneGUIDelegate -= OnSceneGUI;
         SceneView.onSceneGUIDelegate += OnSceneGUI;
+        #else
+        SceneView.duringSceneGui -= OnSceneGUI;
+        SceneView.duringSceneGui += OnSceneGUI;
         #endif
     }
 
@@ -121,7 +121,7 @@ public class LogTreeWindow : EditorWindow{
     #endif
 
     [MenuItem("Window/Activ/Log-Tree")]
-    static void Init(){
+    public static void Init(){
         instance = (LogTreeWindow)EditorWindow
                    .GetWindow<LogTreeWindow>(title: "Log-Tree");
         instance.Show();

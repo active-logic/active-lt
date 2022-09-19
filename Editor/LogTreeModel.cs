@@ -40,13 +40,13 @@ public class LogTreeModel{
 
     public GameObject active => Selection.activeGameObject;
 
-    public Stepper[] roots => active.GetComponents<Stepper>();
+    public LogSource[] roots => active.GetComponents<LogSource>();
 
     public void SelectPreviousFrame(){
         if(playing || !active || frame == null) return;
         int? sel = null;
         foreach(var s in roots){
-            var n = s.history?.Previous(frame.Value)?.frame;
+            var n = s.GetHistory()?.Previous(frame.Value)?.frame;
             if(n != null && (!sel.HasValue || sel.Value < n)) sel = n;
         } frame = sel ?? frame;
     }
@@ -55,7 +55,7 @@ public class LogTreeModel{
         if(playing || !active || frame == null) return;
         int? sel = null;
         foreach(var s in roots){
-            int? n = s.history?.Next(frame.Value)?.frame;
+            int? n = s.GetHistory()?.Next(frame.Value)?.frame;
             if(n != null && (!sel.HasValue || sel.Value > n)) sel = n;
         } frame = sel ?? frame;
     }
@@ -65,7 +65,7 @@ public class LogTreeModel{
     string historyOutput{ get{
         if(active == null) return "Nothing selected";
         var @out = "";
-        foreach(var s in roots) if(s.history != null) @out += HistoryOutput(s);
+        foreach(var s in roots) if(s.GetHistory() != null) @out += HistoryOutput(s);
         return @out;
     }}
 
@@ -76,9 +76,9 @@ public class LogTreeModel{
         }else{
             var @out = "";
             foreach(var k in roots){
-                if(k.isLogging && !string.IsNullOrEmpty(k.log)){
+                if(k.IsLogging() && !string.IsNullOrEmpty(k.GetLog())){
                     if(count > 1) @out += k.GetType().Name + '\n';
-                    @out += k.log + '\n';
+                    @out += k.GetLog() + '\n';
                 }
             } return @out;
         }
@@ -86,14 +86,15 @@ public class LogTreeModel{
 
     bool playing => Application.isPlaying && !Ed.isPaused;
 
-    string HistoryOutput(Stepper s)
-    => s.history[frame.Value].log;
+    string HistoryOutput(LogSource s) => frame.HasValue
+        ? s.GetHistory()[frame.Value].log
+        : null;
 
     int ActiveStepperCount(GameObject go){
-        Stepper[] steppers = go?.GetComponents<Stepper>();
+        var steppers = go?.GetComponents<LogSource>();
         if(steppers == null || steppers.Length == 0) return 0;
         int c = 0;
-        foreach(var k in steppers) if(k.isLogging) c++;
+        foreach(var k in steppers) if(k.IsLogging()) c++;
         return c;
     }
 

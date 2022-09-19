@@ -21,8 +21,6 @@ public class Agent : Stepper{
         state = cont();
     }
 
-    #if !AL_BEST_PERF
-
     // TODO: provisional - when would this be used?
     public T Do<T>() where T: UGig{
         var x = gameObject.AddComponent<T>();
@@ -30,7 +28,5 @@ public class Agent : Stepper{
         enabled = true;
         return x;
     }
-
-    #endif
 
 }}

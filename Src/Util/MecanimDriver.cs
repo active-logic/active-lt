@@ -37,8 +37,10 @@ public class MecanimDriver : AnimationDriver{
         }
     }
 
-    override public bool Exists(string anim)
-        => throw new Ex("Unimplemented");
+    // TODO: need to confirm whether this can be implmeneted in
+    // Mecanim; minimally can definitely be implemented with editor
+    // time support
+    override public bool Exists(string anim) => true;
 
     // τ: normalizedTimeOffset; -1: default value for layer
     void PlayOrCrossFade(string anim, float μ, float τ){

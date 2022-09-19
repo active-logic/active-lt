@@ -12,7 +12,7 @@ using U = UnityEngine.SerializeField;
 
 namespace Active.Core{
 [UnityEngine.AddComponentMenu("Active Logic/Stepper")]
-public class Stepper : MonoBehaviour{
+public class Stepper : MonoBehaviour, LogSource{
 
     public UGig root;
     public bool loop = true;
@@ -23,7 +23,7 @@ public class Stepper : MonoBehaviour{
     #if(!AL_OPTIMIZE)
     [Header("Log")]
     public bool enableLogging = false;
-    [U] internal bool useHistory = false;
+    public bool useHistory = false;
     [Header("Breakpoints")]
     [U] bool  useBreakpoints = true;
     [U] bool  step           = false;
@@ -54,15 +54,31 @@ public class Stepper : MonoBehaviour{
 
     // --------------------------------------------------------------
 
-    void Start()
-    => root = root != null ? root : GetComponent<UGig>();
+    void Start(){
+        if(root != null) return;
+        string candidates = null;
+        bool unique = true;
+        foreach(var e in GetComponents<UGig>()){
+            if(e.rootable){
+                if(root == null) root = e;
+                if(candidates != null){
+                    candidates += ", ";
+                    unique = false;
+                }
+                candidates += e.ToString();
+            }
+        }
+        if(!unique){
+            throw new System.Exception($"Multiple candidates for root: {candidates}");
+        }
+    }
 
-    public action Pause(float duration){
+    public loop Pause(float duration){
         if(duration <= 0) throw
             new Exception("Pause duration must be > 0");
         pause   = duration;
         command = DoPause;
-        return @void();
+        return Active.Core.loop.cont();
     }
 
     public action Suspend(){ command = DoSuspend; return @void(); }
@@ -70,6 +86,7 @@ public class Stepper : MonoBehaviour{
     public action Resume(){ enabled = true; return @void(); }
 
     public status Step(){
+        SimTime.time = UnityEngine.Time.time;
         status s = fail();
         #if !AL_OPTIMIZE
         status.log = enableLogging;
@@ -96,14 +113,14 @@ public class Stepper : MonoBehaviour{
         return s;
     }
 
-    // PROVISIONAL
     // NOTE: 'inferNext' is needed because `Push` may be
     // called before `Start` which may auto-assign a root task
-    public void Push(Func<status> φ, bool inferNext=true){
+    public loop Push(Func<status> φ, bool inferNext=true){
         var next = root;
         if(inferNext && root == null) next = GetComponent<UGig>();
         var gig = gameObject.AddComponent<UGigAdapter>();
         gig.call = φ; gig.next = next; root = gig;
+        return Active.Core.loop.cont();
     }
 
     public virtual void Run(Func<status> φ){
@@ -131,5 +148,11 @@ public class Stepper : MonoBehaviour{
     { CancelInvoke(); Invoke("Resume", pause); enabled = false; pause = 0; }
 
     void DoSuspend(){ CancelInvoke(); enabled = false; }
+
+    // <LogSource> ==================================================
+
+    History LogSource.GetHistory() => history;
+    bool    LogSource.IsLogging()  => isLogging;
+    string  LogSource.GetLog()     => log;
 
 }}
