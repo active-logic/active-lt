@@ -15,21 +15,21 @@ public class ALHistoryGUI{
 
     public static int? Draw(LogTreeModel target){
         var rs = target.renderSettings; color = rs.color; int? sel = null;
-        foreach(var s in target.roots) if(s.history != null)
+        foreach(var s in target.roots) if(s.GetHistory() != null)
             Draw(s, rs, ref sel);
         return sel;
     }
 
     public static void DrawSelected(LogTreeModel target){
         if(target.frame == null) return; color = Color.red;
-        foreach(var s in target.roots) if(s.history!=null){
+        foreach(var s in target.roots) if(s.GetHistory()!=null){
             var f = target.frame.Value;
-            Emphasis(s.history[target.frame.Value], target.renderSettings);
+            Emphasis(s.GetHistory()[target.frame.Value], target.renderSettings);
         }
     }
 
-    public static int? Draw(Stepper s, Settings rs, ref int? sel){
-        VTrace prev = null; foreach(VTrace x in s.history){
+    public static int? Draw(LogSource s, Settings rs, ref int? sel){
+        VTrace prev = null; foreach(VTrace x in s.GetHistory()){
             if(prev != null) DrawLine(Pos(prev, rs), Pos(x, rs));
             if(Button(Pos(x, rs), Rot(x), rs.size, rs.pickSize,
                                           RectangleHandleCap)) sel = x.frame;
