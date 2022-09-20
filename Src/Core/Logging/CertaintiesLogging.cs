@@ -24,9 +24,18 @@ partial struct action{
 
     readonly Meta meta;
 
-    internal action(Meta meta) { this.meta = meta; }
+    public action this[ValidString reason]
+    => log ? new action(Meta.From(meta, reason)) : this;
+
+    internal action(in Meta meta) => this.meta = meta;
 
     public static failure operator ! (action s) => new failure(s.meta);
+
+    public static implicit operator status(action self)
+    => new status(1, self.meta);
+
+    public static implicit operator pending(action self)
+    => new pending(1, self.meta);
 
     public action Via(V reason = null,
                       [P]S p="", [M]S m="", [L]int l=0)
@@ -42,11 +51,18 @@ partial struct failure{
 
     readonly Meta meta;
 
-    //public status never => new status(-1, meta);
+    public failure this[ValidString reason]
+    => log ? new failure(Meta.From(meta, reason)) : this;
 
-    //public status fail => new status(-1, meta);
+    internal failure(in Meta meta) => this.meta = meta;
 
     public static action operator ! (failure s) => new action(s.meta);
+
+    public static implicit operator impending(failure self)
+    => new impending(-1, self.meta);
+
+    public static implicit operator status(failure self)
+    => new status(-1, self.meta);
 
     internal failure(Meta meta) { this.meta = meta; }
 
@@ -64,7 +80,21 @@ partial struct loop{
 
     readonly Meta meta;
 
+    public loop this[ValidString reason]
+    => log ? new loop(Meta.From(meta, reason)) : this;
+
+    internal loop(in Meta meta) => this.meta = meta;
+
     public loop(Meta meta) { this.meta = meta; }
+
+    public static implicit operator impending(loop self)
+    => new impending(0, self.meta);
+
+    public static implicit operator pending(loop self)
+    => new pending(0, self.meta);
+
+    public static implicit operator status(loop self)
+    => new status(0, self.meta);
 
     public status ever => new status(0, meta);
 
@@ -79,12 +109,18 @@ partial struct loop{
 
 partial struct pending{
 
+    public pending this[ValidString reason]
+    => log ? new pending(ω, Meta.From(meta, reason)) : this;
+
     internal pending(int val, Meta m) { ω = val; meta = m; }
 
     public status due => new status(ω, meta);
 
     public static impending operator !(pending s)
     => new impending(-s.ω, s.meta);
+
+    public static implicit operator status(pending self)
+    => new status(self.ω, self.meta);
 
     public static pending cont(ValidString reason = null,
                                [P] S p="", [M] S m="", [L] int l=0)
@@ -101,12 +137,18 @@ partial struct pending{
 
 partial struct impending{
 
+    public impending this[ValidString reason]
+    => log ? new impending(ω, Meta.From(meta, reason)) : this;
+
     internal impending(int val, Meta m) { ω = val; meta = m; }
 
     public status undue => new status(ω, meta);
 
     public static pending operator !(impending s)
     => new pending(-s.ω, s.meta);
+
+    public static implicit operator status(impending self)
+    => new status(self.ω, self.meta);
 
     public static impending cont
       (ValidString reason = null, [P] S p="", [M] S m="", [L] int l=0)
